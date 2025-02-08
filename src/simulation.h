@@ -4,7 +4,7 @@
 #include <QObject>
 #include <cmath>
 
-/* シミュレーション部分のインターフェース（必要に応じて拡張可能） */
+/* シミュレーション部分の抽象インターフェース（拡張用） */
 class SimulationInterface : public QObject {
     Q_OBJECT
 public:
@@ -15,7 +15,6 @@ public:
     virtual void step(double dt) = 0;
 
 signals:
-    // シミュレーション更新時に通知するシグナル（オプション）
     void simulationUpdated();
 };
 
@@ -26,17 +25,16 @@ public:
     explicit DoublePendulumSimulation(QObject *parent = nullptr);
 
     // シミュレーションパラメータ
-    double m1, m2;       // 質量
-    double L1, L2;       // 振り子の長さ（ピクセル単位でも可）
-    double theta1, theta2;  // 角度（ラジアン）
-    double omega1, omega2;  // 角速度
-    double g;            // 重力加速度
+    double m1, m2;            // 質量
+    double L1, L2;            // 振り子の長さ
+    double theta1, theta2;    // 角度（ラジアン）
+    double omega1, omega2;    // 角速度
+    double g;                 // 重力加速度
 
     // dt秒だけシミュレーションを進める
     virtual void step(double dt) override;
 
-    // 現在の各振り子の位置（相対座標）を返す
-    // （原点は振り子の固定点）
+    // 現在の各振り子の位置を返す（原点を固定点とする）
     void getPositions(double &x1, double &y1, double &x2, double &y2) const;
 };
 
