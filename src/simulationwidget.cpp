@@ -34,7 +34,7 @@ void SimulationWidget::doStep()
     m_tracePoints.append(QPoint(ballX, ballY));
 
     // 軌跡の点数制限（例：最大10000点）
-    const int maxTracePoints = 10000;
+    const int maxTracePoints = 100000;
     if (m_tracePoints.size() > maxTracePoints)
         m_tracePoints.remove(0, m_tracePoints.size() - maxTracePoints);
 
