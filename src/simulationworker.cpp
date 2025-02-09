@@ -18,30 +18,23 @@ SimulationWorker::~SimulationWorker()
 void SimulationWorker::process()
 {
     const int targetFrameTimeMs = 16; // 目標更新周期（ミリ秒）
+    int updateCounter = 0;
+    const int updateInterval = 10; // 10回に1回更新信号を送る    
     while (m_running) {
 //        QElapsedTimer timer;
 //        timer.start();
 
         // シミュレーションの更新（m_dt は dt の設定値）
         m_simulation->step(m_dt);
-        double x1, y1, x2, y2;
-        m_simulation->getPositions(x1, y1, x2, y2);
-        emit simulationUpdated(x1, y1, x2, y2);
 
-//        // ミリ秒ではなくナノ秒単位で経過時間を取得
-//        qint64 elapsedNs = timer.nsecsElapsed();
-//        // targetFrameTimeMs をナノ秒に換算（1ms = 1,000,000ns）
-//        qint64 targetFrameTimeNs = targetFrameTimeMs * 1000000LL;
-//        qint64 remainingNs = targetFrameTimeNs - elapsedNs;
-//        // デバッグ出力：remainingNs をコンソールに出力
-//        qDebug() << "Remaining ns:" << remainingNs;
+        updateCounter++;
+        if (updateCounter >= updateInterval) {
+            double x1, y1, x2, y2;
+            m_simulation->getPositions(x1, y1, x2, y2);
+            emit simulationUpdated(x1, y1, x2, y2);
+            updateCounter = 0;
+        }
         QThread::usleep(5);
-//        if (remainingNs > 0) {
-//            // マイクロ秒に変換（1μs = 1000ns）
-//            qint64 sleepTimeUs = remainingNs / 1000;
-//            QThread::usleep(static_cast<unsigned long>(sleepTimeUs));
-//        }
-        // remainingNs <= 0 の場合は、処理時間が目標を超えているのでそのまま次のループへ
     }
 }
 

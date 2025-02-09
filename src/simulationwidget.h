@@ -2,6 +2,8 @@
 #define SIMULATIONWIDGET_H
 
 #include <QWidget>
+#include <QVector>
+#include <QPoint>
 
 class QThread;
 class SimulationWorker;
@@ -23,8 +25,11 @@ private:
     QThread *m_simThread;
     SimulationWorker *m_worker;
 
-    // 描画用の現在の位置
+    // 現在の振り子の位置（描画用）
     double m_x1, m_y1, m_x2, m_y2;
+
+    // 青いボールの軌跡を保持するためのリスト
+    QVector<QPoint> m_tracePoints;
 };
 
 #endif // SIMULATIONWIDGET_H
