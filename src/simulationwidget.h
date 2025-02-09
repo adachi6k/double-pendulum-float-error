@@ -4,9 +4,7 @@
 #include <QWidget>
 #include <QVector>
 #include <QPoint>
-
-class QThread;
-class SimulationWorker;
+#include "simulation.h"  // DoublePendulumSimulation を含む
 
 class SimulationWidget : public QWidget
 {
@@ -15,20 +13,22 @@ public:
     explicit SimulationWidget(QWidget *parent = nullptr);
     ~SimulationWidget();
 
+public slots:
+    // グローバルタイマーから呼ばれて、1ステップ分の更新を行う
+    void doStep();
+
 protected:
     void paintEvent(QPaintEvent *event) override;
 
-private slots:
-    void onSimulationUpdated(double x1, double y1, double x2, double y2);
-
 private:
-    QThread *m_simThread;
-    SimulationWorker *m_worker;
+    // シミュレーションオブジェクト（各モデル固有の状態を保持）
+    DoublePendulumSimulation *m_simulation;
+    // シミュレーション上の時間刻み
+    double m_dt;
 
-    // 現在の振り子の位置（描画用）
+    // 描画用の最新の位置
     double m_x1, m_y1, m_x2, m_y2;
-
-    // 青いボールの軌跡を保持するためのリスト
+    // 軌跡用の点を保持
     QVector<QPoint> m_tracePoints;
 };
 
