@@ -12,6 +12,7 @@ set(SOURCE_FILES
     src/main.cpp
     src/mainwindow.cpp
     src/simulation.cpp
+    src/simulation_interface.cpp    
     src/simulationworker.cpp
     src/simulationwidget.cpp
 )
@@ -19,6 +20,7 @@ set(SOURCE_FILES
 set(HEADER_FILES
     src/mainwindow.h
     src/simulation.h
+    src/simulation_interface.h    
     src/simulationworker.h
     src/simulationwidget.h
 )

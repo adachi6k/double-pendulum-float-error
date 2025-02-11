@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "simulation.h"
+#include "simulation_interface.h"
 
 class SimulationWorker : public QObject
 {
@@ -28,7 +29,7 @@ signals:
 
 private:
     bool m_running;
-    DoublePendulumSimulation *m_simulation;
+    SimulationInterface *m_simulation;
     double m_dt; // シミュレーションの時間刻み（秒）
 };
 

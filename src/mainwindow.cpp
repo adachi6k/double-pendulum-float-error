@@ -8,10 +8,15 @@ MainWindow::MainWindow(QWidget *parent)
 {
     QHBoxLayout *layout = new QHBoxLayout(this);
 
-    // 3つの SimulationWidget インスタンスを生成
-    SimulationWidget *sim1 = new SimulationWidget(this);
-    SimulationWidget *sim2 = new SimulationWidget(this);
-    SimulationWidget *sim3 = new SimulationWidget(this);
+    // 各シミュレーションモデルを作成して差し替える
+    SimulationInterface *model1 = new StandardDoublePendulumSimulation(this);
+    SimulationInterface *model2 = new AlternativeDoublePendulumSimulation(this);
+    SimulationInterface *model3 = new ThirdDoublePendulumSimulation(this);
+
+    SimulationWidget *sim1 = new SimulationWidget(model1, this);
+    SimulationWidget *sim2 = new SimulationWidget(model2, this);
+    SimulationWidget *sim3 = new SimulationWidget(model3, this);
+
 
     layout->addWidget(sim1);
     layout->addWidget(sim2);

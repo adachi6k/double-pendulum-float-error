@@ -3,16 +3,13 @@
 #include <QPaintEvent>
 #include <QDebug>
 
-SimulationWidget::SimulationWidget(QWidget *parent)
+SimulationWidget::SimulationWidget(SimulationInterface *model, QWidget *parent)
     : QWidget(parent),
       m_dt(0.005), // dt の初期値（必要に応じて調整）
-      m_x1(0), m_y1(0), m_x2(0), m_y2(0)
+      m_x1(0), m_y1(0), m_x2(0), m_y2(0),
+      m_simulation(model)
 {
-    // 描画領域を広めに設定
     setMinimumSize(600, 300);
-
-    // シミュレーションオブジェクトを生成
-    m_simulation = new DoublePendulumSimulation(this);
 }
 
 SimulationWidget::~SimulationWidget()

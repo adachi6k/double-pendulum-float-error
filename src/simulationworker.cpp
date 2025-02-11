@@ -1,4 +1,5 @@
 #include "simulationworker.h"
+#include "simulation.h"
 #include <QThread>
 #include <QDebug>
 #include <QElapsedTimer>
@@ -6,7 +7,7 @@
 SimulationWorker::SimulationWorker(QObject *parent)
     : QObject(parent), m_running(true), m_dt(0.001)  // 初期 dt = 0.001秒
 {
-    m_simulation = new DoublePendulumSimulation(this);
+    m_simulation = new StandardDoublePendulumSimulation(this);
 }
 
 SimulationWorker::~SimulationWorker()

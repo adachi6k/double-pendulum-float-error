@@ -10,7 +10,7 @@ class SimulationWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SimulationWidget(QWidget *parent = nullptr);
+    explicit SimulationWidget(SimulationInterface *model, QWidget *parent = nullptr);
     ~SimulationWidget();
 
 public slots:
@@ -22,7 +22,7 @@ protected:
 
 private:
     // シミュレーションオブジェクト（各モデル固有の状態を保持）
-    DoublePendulumSimulation *m_simulation;
+    SimulationInterface *m_simulation;
     // シミュレーション上の時間刻み
     double m_dt;
 

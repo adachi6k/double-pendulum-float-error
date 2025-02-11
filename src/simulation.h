@@ -1,41 +1,40 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
-#include <QObject>
+#include "simulation_interface.h"  // SimulationInterface を定義したファイル
 #include <cmath>
 
-/* シミュレーション部分の抽象インターフェース（拡張用） */
-class SimulationInterface : public QObject {
+// --- Standard Model ---
+class StandardDoublePendulumSimulation : public SimulationInterface {
     Q_OBJECT
 public:
-    explicit SimulationInterface(QObject *parent = nullptr) : QObject(parent) {}
-    virtual ~SimulationInterface() {}
+    explicit StandardDoublePendulumSimulation(QObject *parent = nullptr);
+    virtual void step(double dt) override;
+    virtual void getPositions(double &x1, double &y1, double &x2, double &y2) const override;
 
-    // dt秒だけシミュレーションを進める
-    virtual void step(double dt) = 0;
-
-signals:
-    void simulationUpdated();
+    double m1, m2, L1, L2, theta1, theta2, omega1, omega2, g;
 };
 
-/* 2重振り子のシミュレーション（Euler法による簡易実装） */
-class DoublePendulumSimulation : public SimulationInterface {
+// --- Alternative Model ---
+class AlternativeDoublePendulumSimulation : public SimulationInterface {
     Q_OBJECT
 public:
-    explicit DoublePendulumSimulation(QObject *parent = nullptr);
-
-    // シミュレーションパラメータ
-    double m1, m2;            // 質量
-    double L1, L2;            // 振り子の長さ
-    double theta1, theta2;    // 角度（ラジアン）
-    double omega1, omega2;    // 角速度
-    double g;                 // 重力加速度
-
-    // dt秒だけシミュレーションを進める
+    explicit AlternativeDoublePendulumSimulation(QObject *parent = nullptr);
     virtual void step(double dt) override;
+    virtual void getPositions(double &x1, double &y1, double &x2, double &y2) const override;
 
-    // 現在の各振り子の位置を返す（原点を固定点とする）
-    void getPositions(double &x1, double &y1, double &x2, double &y2) const;
+    double m1, m2, L1, L2, theta1, theta2, omega1, omega2, g;
+};
+
+// --- Third Model ---
+class ThirdDoublePendulumSimulation : public SimulationInterface {
+    Q_OBJECT
+public:
+    explicit ThirdDoublePendulumSimulation(QObject *parent = nullptr);
+    virtual void step(double dt) override;
+    virtual void getPositions(double &x1, double &y1, double &x2, double &y2) const override;
+
+    double m1, m2, L1, L2, theta1, theta2, omega1, omega2, g;
 };
 
 #endif // SIMULATION_H
