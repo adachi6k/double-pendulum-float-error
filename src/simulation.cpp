@@ -43,6 +43,8 @@ void StandardDoublePendulumSimulation::getPositions(double &x1, double &y1, doub
     y2 = y1 + L2 * cos(theta2);
 }
 
+QString StandardDoublePendulumSimulation::modelName() const { return "Standard Model"; }
+
 // --- AlternativeDoublePendulumSimulation Implementation ---
 // 代替モデルでは、例として重力を高め、丸めモードを FE_UPWARD に変更しています。
 
@@ -90,6 +92,8 @@ void AlternativeDoublePendulumSimulation::getPositions(double &x1, double &y1, d
     y2 = y1 + L2 * cos(theta2);
 }
 
+QString AlternativeDoublePendulumSimulation::modelName() const { return "Alternative Model"; }
+
 // --- ThirdDoublePendulumSimulation Implementation ---
 // 3 番目のモデルとして、パラメータを若干変更した例です。
 
@@ -130,3 +134,5 @@ void ThirdDoublePendulumSimulation::getPositions(double &x1, double &y1, double 
     x2 = x1 + L2 * sin(theta2);
     y2 = y1 + L2 * cos(theta2);
 }
+
+QString ThirdDoublePendulumSimulation::modelName() const { return "Third Model"; }

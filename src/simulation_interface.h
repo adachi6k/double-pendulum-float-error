@@ -2,6 +2,7 @@
 #define SIMULATION_INTERFACE_H
 
 #include <QObject>
+#include <QString>
 
 class SimulationInterface : public QObject {
     Q_OBJECT
@@ -13,6 +14,8 @@ public:
     virtual void step(double dt) = 0;
     // 現在の振り子の位置を返す
     virtual void getPositions(double &x1, double &y1, double &x2, double &y2) const = 0;
+    // モデル名を返す
+    virtual QString modelName() const = 0;
 
 signals:
     void simulationUpdated();

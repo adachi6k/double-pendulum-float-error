@@ -76,4 +76,12 @@ void SimulationWidget::paintEvent(QPaintEvent *event)
     // 固定点（ピボット）の描画
     painter.setBrush(Qt::black);
     painter.drawEllipse(QPoint(pivotX, pivotY), 5, 5);
+    
+    // モデル名称をウィジェット下部に描画
+    QString name = m_simulation->modelName();
+    QFont font = painter.font();
+    font.setPointSize(14);
+    painter.setFont(font);
+    QRect textRect(0, height() - 30, width(), 30);
+    painter.drawText(textRect, Qt::AlignCenter, name);
 }
