@@ -3,9 +3,7 @@
 #include <QHBoxLayout>
 #include <QTimer>
 
-MainWindow::MainWindow(QWidget *parent)
-    : QWidget(parent)
-{
+MainWindow::MainWindow(QWidget *parent) : QWidget(parent) {
     QHBoxLayout *layout = new QHBoxLayout(this);
 
     // 各シミュレーションモデルを作成して差し替える
@@ -16,7 +14,6 @@ MainWindow::MainWindow(QWidget *parent)
     SimulationWidget *sim1 = new SimulationWidget(model1, this);
     SimulationWidget *sim2 = new SimulationWidget(model2, this);
     SimulationWidget *sim3 = new SimulationWidget(model3, this);
-
 
     layout->addWidget(sim1);
     layout->addWidget(sim2);
@@ -29,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     // グローバルタイマー（例：16ms間隔＝約60FPS）
     QTimer *syncTimer = new QTimer(this);
     syncTimer->setInterval(16);
-    connect(syncTimer, &QTimer::timeout, this, [=](){
+    connect(syncTimer, &QTimer::timeout, this, [=]() {
         // 1周期で複数ステップ更新（例：5ステップ分更新）
         const int stepsPerTick = 50;
         for (int i = 0; i < stepsPerTick; i++) {
@@ -41,6 +38,4 @@ MainWindow::MainWindow(QWidget *parent)
     syncTimer->start();
 }
 
-MainWindow::~MainWindow()
-{
-}
+MainWindow::~MainWindow() {}

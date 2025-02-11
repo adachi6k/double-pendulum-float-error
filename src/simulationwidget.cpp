@@ -1,24 +1,17 @@
 #include "simulationwidget.h"
-#include <QPainter>
-#include <QPaintEvent>
 #include <QDebug>
+#include <QPaintEvent>
+#include <QPainter>
 
 SimulationWidget::SimulationWidget(SimulationInterface *model, QWidget *parent)
-    : QWidget(parent),
-      m_dt(0.005), // dt の初期値（必要に応じて調整）
-      m_x1(0), m_y1(0), m_x2(0), m_y2(0),
-      m_simulation(model)
-{
+    : QWidget(parent), m_dt(0.005), // dt の初期値（必要に応じて調整）
+      m_x1(0), m_y1(0), m_x2(0), m_y2(0), m_simulation(model) {
     setMinimumSize(600, 300);
 }
 
-SimulationWidget::~SimulationWidget()
-{
-    delete m_simulation;
-}
+SimulationWidget::~SimulationWidget() { delete m_simulation; }
 
-void SimulationWidget::doStep()
-{
+void SimulationWidget::doStep() {
     // 同じ dt でシミュレーションを更新
     m_simulation->step(m_dt);
     m_simulation->getPositions(m_x1, m_y1, m_x2, m_y2);
@@ -38,8 +31,7 @@ void SimulationWidget::doStep()
     update();
 }
 
-void SimulationWidget::paintEvent(QPaintEvent *event)
-{
+void SimulationWidget::paintEvent(QPaintEvent *event) {
     Q_UNUSED(event);
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
@@ -76,7 +68,7 @@ void SimulationWidget::paintEvent(QPaintEvent *event)
     // 固定点（ピボット）の描画
     painter.setBrush(Qt::black);
     painter.drawEllipse(QPoint(pivotX, pivotY), 5, 5);
-    
+
     // モデル名称をウィジェット下部に描画
     QString name = m_simulation->modelName();
     QFont font = painter.font();

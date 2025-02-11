@@ -1,26 +1,26 @@
 #ifndef SIMULATIONWIDGET_H
 #define SIMULATIONWIDGET_H
 
-#include <QWidget>
-#include <QVector>
+#include "simulation.h" // DoublePendulumSimulation を含む
 #include <QPoint>
-#include "simulation.h"  // DoublePendulumSimulation を含む
+#include <QVector>
+#include <QWidget>
 
-class SimulationWidget : public QWidget
-{
+class SimulationWidget : public QWidget {
     Q_OBJECT
-public:
-    explicit SimulationWidget(SimulationInterface *model, QWidget *parent = nullptr);
+  public:
+    explicit SimulationWidget(SimulationInterface *model,
+                              QWidget *parent = nullptr);
     ~SimulationWidget();
 
-public slots:
+  public slots:
     // グローバルタイマーから呼ばれて、1ステップ分の更新を行う
     void doStep();
 
-protected:
+  protected:
     void paintEvent(QPaintEvent *event) override;
 
-private:
+  private:
     // シミュレーションオブジェクト（各モデル固有の状態を保持）
     SimulationInterface *m_simulation;
     // シミュレーション上の時間刻み

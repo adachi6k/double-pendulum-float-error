@@ -3,10 +3,9 @@
 
 #include <QWidget>
 
-class MainWindow : public QWidget
-{
+class MainWindow : public QWidget {
     Q_OBJECT
-public:
+  public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 };
