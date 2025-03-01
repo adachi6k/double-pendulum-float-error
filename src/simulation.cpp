@@ -45,7 +45,7 @@ void StandardDoublePendulumSimulation::getPositions(double &x1, double &y1,
 }
 
 QString StandardDoublePendulumSimulation::modelName() const {
-    return "Standard Model";
+    return "Round toward nearest";
 }
 
 // --- AlternativeDoublePendulumSimulation Implementation ---
@@ -92,7 +92,7 @@ void AlternativeDoublePendulumSimulation::getPositions(double &x1, double &y1,
 }
 
 QString AlternativeDoublePendulumSimulation::modelName() const {
-    return "Alternative Model";
+    return "Round toward positive infinity";
 }
 
 // --- ThirdDoublePendulumSimulation Implementation ---
@@ -136,5 +136,5 @@ void ThirdDoublePendulumSimulation::getPositions(double &x1, double &y1,
 }
 
 QString ThirdDoublePendulumSimulation::modelName() const {
-    return "Third Model";
+    return "Round toward zero";
 }
